@@ -119,6 +119,25 @@ textarea {
     background-color: white;
   }
 
+  .input-skills{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .delete-skill-btn {
+    border: none;
+    font-size: 24px;
+    background-color: transparent;
+    cursor: pointer;
+    color: #808080;
+    transition: color 0.3s ease;
+  }
+  
+  .delete-skill-btn:hover {
+    color: #555555;
+  }
+
 /*preview*/
 .right-preview{
     width: 21cm;
@@ -130,9 +149,9 @@ textarea {
     font-size: 17px;
 }
 
-#contactPhoto-preview{
-    width: 130px;
-    height: 130px;
+.img-container > img{
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
 
 }

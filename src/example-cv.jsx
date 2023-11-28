@@ -41,10 +41,22 @@ export const personCV = {
     },
 ],
     skills: [
-        'React',
-        'HTML',
-        'CSS',
-        'JavaScript',
+        {
+            name: 'React',
+            id: uuid(),
+        },
+        {
+            name: 'HTML',
+            id: uuid(),
+        },
+        {
+            name: 'CSS',
+            id: uuid(),
+        },
+        {
+            name: 'JavaScript',
+            id: uuid(),
+        },
     ],
     contact:{
         email: 'denisa20@gmail.com',

@@ -4,7 +4,7 @@ export default function SkillsPreview({data}){
         <div className="skills-preview">
             <h2 className="skills-preview-title title-preview">Skills</h2>
             {data.skills.map(skill => (
-                <li key = {skill}>{skill}</li>
+                <li key = {skill.id}>{skill.name}</li>
             ))}
         </div>
     )

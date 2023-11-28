@@ -10,13 +10,13 @@ import SkillsPreview from "./components/SkillsPreview";
 import EducationPreview from "./components/EducationPreview";
 import ExperiencePreview from "./components/ExperiencePreview";
 import { useState } from "react";
+import { v1 as uuid } from "uuid";
 export default function App() {
   const [data, setData] = useState(personCV);
-  function handleChange(section, key, value) {
-    setData((prevData) => ({
-      ...prevData,
-      [section]: { ...prevData[section], [key]: value },
-    }));
+
+  function handleChange(section, key, value){
+    setData({...data, 
+      [section]: {...data[section], [key]: value}})
   }
 
   function handleArrayChange(section, key, value, index) {
@@ -26,6 +26,19 @@ export default function App() {
         i === index ? { ...item, [key]: value } : item
       ),
     }));
+  }
+
+  function addSkill(){
+    setData({...data, 
+    skills: [...data.skills, {name:"", id: uuid()}]
+  })
+  }
+
+  function handleDeleteSkill(itemId){
+    setData({...data,
+      skills: data.skills.filter(skill => (
+        skill.id !== itemId
+      ))})
   }
 
   function pictureUpload(e) {
@@ -45,7 +58,7 @@ export default function App() {
         <CreateGeneralInformation data={data} onChange={handleChange} pictureUpload={pictureUpload}/>
         <CreateEducation data={data} onChange={handleArrayChange}/>
         <CreateExperience data={data} onChange={handleArrayChange}/>
-        <CreateSkills data={data} onChange={handleArrayChange}/>
+        <CreateSkills data={data} onChange={handleArrayChange} addSkill={addSkill} deleteSkill={handleDeleteSkill}/>
         <CreateContact data={data} onChange={handleChange}/>
       </div>
       <div className="right-preview">
