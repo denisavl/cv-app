@@ -5,8 +5,9 @@ export const personCV = {
     generalInfo: {
        fullName: 'Denisa Vlad',
        profession: 'Front-End',
+       fileName: 'denisa.jpeg',
        contactPhoto: contactPhoto,
-       summary: 'Experienced UI with 5+ years of experience in developing mobile, web and desktop applications for a variety of clients.'
+       summary: 'Experienced UI with 5+ years of experience in developing mobile, web and desktop applications for a variety of clients.',
     },
     experience: [{
         id: uuid(),
@@ -37,7 +38,8 @@ export const personCV = {
         degree: 'High School Diploma',
         startDate: 'September 2008',
         endDate: 'July 2013',
-    }],
+    },
+],
     skills: [
         'React',
         'HTML',

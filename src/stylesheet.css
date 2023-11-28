@@ -68,11 +68,14 @@ textarea {
     resize: none;
   }
 
-
+.multiple{
+    font-size: 21px;
+    margin: 15px 0;
+    color:rgb(7, 7, 97);
+}
 
 .input-container {
     margin-bottom: 10px;
-    
 }
 
 .form-container{
@@ -80,6 +83,16 @@ textarea {
     padding: 2rem;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.full-date{
+    display: flex;
+    justify-content: space-between;
+    /* flex: 1; */
+}
+
+.full-date > div{
+    width: 250px;
 }
 
   #contactPicture {
@@ -202,4 +215,5 @@ h3{
 
 .location-preview{
     font-style: italic;
+    margin: 2px 0;
 }

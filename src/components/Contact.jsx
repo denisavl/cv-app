@@ -1,10 +1,11 @@
-export default function CreateContact(){
+/* eslint-disable react/prop-types */
+export default function CreateContact({data, onChange}){
     const contactFields = [
-    { key: "email", label: "", type: "email", placeholder: "Email"},
-    { key: "phone", label: "", type: "tel", placeholder: "Phone"},
-    { key: "address", label: "", type: "text", placeholder: "Address"},
-    {key: "linkedin", label: "", type: "url", placeholder: "LinkedIn"},
-    { key: "github", label: "", type: "url", placeholder: "Github"},
+    { key: "email", label: "", type: "email", placeholder: "Email", value: data.contact.email},
+    { key: "phone", label: "", type: "tel", placeholder: "Phone", value: data.contact.phone},
+    { key: "address", label: "", type: "text", placeholder: "Address", value: data.contact.address},
+    {key: "linkedin", label: "", type: "url", placeholder: "LinkedIn", value: data.contact.linkedIn},
+    { key: "github", label: "", type: "url", placeholder: "Github", value: data.contact.github},
     ]
 
     return(
@@ -16,7 +17,9 @@ export default function CreateContact(){
                     <input type={field.type}
                     id={field.key}
                     name={field.key}
-                    placeholder={field.placeholder} />
+                    placeholder={field.placeholder}
+                    value={field.value}
+                    onChange={(e) => onChange('contact',field.key, e.target.value)} />
                 </div>
             ))}
         </form>
