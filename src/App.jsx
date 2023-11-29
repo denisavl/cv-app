@@ -14,9 +14,8 @@ import { v1 as uuid } from "uuid";
 export default function App() {
   const [data, setData] = useState(personCV);
 
-  function handleChange(section, key, value){
-    setData({...data, 
-      [section]: {...data[section], [key]: value}})
+  function handleChange(section, key, value) {
+    setData({ ...data, [section]: { ...data[section], [key]: value } });
   }
 
   function handleArrayChange(section, key, value, index) {
@@ -28,17 +27,43 @@ export default function App() {
     }));
   }
 
-  function addSkill(){
-    setData({...data, 
-    skills: [...data.skills, {name:"", id: uuid()}]
-  })
+  function addSkill() {
+    setData({ ...data, skills: [...data.skills, { name: "", id: uuid() }] });
   }
 
-  function handleDeleteSkill(itemId){
-    setData({...data,
-      skills: data.skills.filter(skill => (
-        skill.id !== itemId
-      ))})
+  function handleDeleteSkill(itemId) {
+    setData({
+      ...data,
+      skills: data.skills.filter((skill) => skill.id !== itemId),
+    });
+  }
+
+  function handleAddEducation() {
+    setData({
+      ...data,
+      education: [
+        ...data.education,
+        { id: uuid(), school: "", degree: "", startDate: "", endDate: "" },
+      ],
+    });
+  }
+
+  function handleAddExperience() {
+    setData({
+      ...data,
+      experience: [
+        ...data.experience,
+        {
+          id: uuid(),
+          jobTitle: "",
+          company: "",
+          startDate: "",
+          endDate: "",
+          location: "",
+          description: "",
+        },
+      ],
+    });
   }
 
   function pictureUpload(e) {
@@ -55,27 +80,44 @@ export default function App() {
   return (
     <div className="CVApp">
       <div className="left-form">
-        <CreateGeneralInformation data={data} onChange={handleChange} pictureUpload={pictureUpload}/>
-        <CreateEducation data={data} onChange={handleArrayChange}/>
-        <CreateExperience data={data} onChange={handleArrayChange}/>
-        <CreateSkills data={data} onChange={handleArrayChange} addSkill={addSkill} deleteSkill={handleDeleteSkill}/>
-        <CreateContact data={data} onChange={handleChange}/>
+        <CreateGeneralInformation
+          data={data}
+          onChange={handleChange}
+          pictureUpload={pictureUpload}
+        />
+        <CreateEducation
+          data={data}
+          onChange={handleArrayChange}
+          onClick={handleAddEducation}
+        />
+        <CreateExperience
+          data={data}
+          onChange={handleArrayChange}
+          onClick={handleAddExperience}
+        />
+        <CreateSkills
+          data={data}
+          onChange={handleArrayChange}
+          addSkill={addSkill}
+          deleteSkill={handleDeleteSkill}
+        />
+        <CreateContact data={data} onChange={handleChange} />
       </div>
       <div className="right-preview">
-      <CreateHeader data={data} />
-      <div className="left-section">
-        <ContactPreview data={data} />
-        <SkillsPreview data={data} />
-      </div>
-      <div className="right-section">
-      <div className="summary-section">
-          <h2 className="summary-title title-preview">Summary</h2>
-          <p>{data.generalInfo.summary}</p>
+        <CreateHeader data={data} />
+        <div className="left-section">
+          <ContactPreview data={data} />
+          <SkillsPreview data={data} />
         </div>
-        <EducationPreview data={data} />
-        <ExperiencePreview data={data} />
+        <div className="right-section">
+          <div className="summary-section">
+            <h2 className="summary-title title-preview">Summary</h2>
+            <p>{data.generalInfo.summary}</p>
+          </div>
+          <EducationPreview data={data} />
+          <ExperiencePreview data={data} />
+        </div>
       </div>
-    </div>
     </div>
   );
 }

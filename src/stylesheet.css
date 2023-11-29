@@ -103,7 +103,7 @@ textarea {
     margin-bottom: 15px;
   }
 
-  .addSkills{
+  .create-subSection{
     padding: 5px 40px;
     border: none;
     border-radius: 16px;
@@ -114,7 +114,7 @@ textarea {
     transition: background-color 0.3s ease-in-out, border 0.3s ease-in-out;
   }
 
-  .addSkills:hover{
+  .create-subSection:hover{
     border: 3px solid #e4e6e7;
     background-color: white;
   }

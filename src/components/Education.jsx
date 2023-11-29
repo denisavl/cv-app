@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
-export default function CreateEducation({ data, onChange }) {
+import AddButton from "./AddSubSection";
+export default function CreateEducation({ data, onChange, onClick }) {
   return (
     <form className="education-form form-container">
       <h1 className="title-education">Education</h1>
@@ -54,6 +55,7 @@ export default function CreateEducation({ data, onChange }) {
           </div>
         </div>
       ))}
+      <AddButton onClick={onClick}/>
     </form>
   );
 }

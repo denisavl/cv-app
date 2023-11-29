@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
-export default function CreateExperience({ data, onChange }) {
+import AddButton from "./AddSubSection";
+export default function CreateExperience({ data, onChange, onClick }) {
     return (
       <form className="experience-form form-container">
         <h1 className="title-experience">Professional Experience</h1>
@@ -78,6 +79,7 @@ export default function CreateExperience({ data, onChange }) {
             </div>
           </div>
         ))}
+        <AddButton onClick={onClick}/>
       </form>
     );
   }

@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import AddButton from "./AddSubSection"
 export default function CreateSkills({data, onChange, addSkill, deleteSkill }){
     return(
         <form className="skills-form form-container">
@@ -17,9 +18,7 @@ export default function CreateSkills({data, onChange, addSkill, deleteSkill }){
             {data.skills.length > 1 && <button className="delete-skill-btn" onClick={() => deleteSkill(skill.id)}>x</button>}
           </div>
         ))}
-        <button type="button" className="addSkills" onClick={addSkill}>
-          +
-        </button>
+        <AddButton onClick={addSkill} />
       </form>
     )
 }
