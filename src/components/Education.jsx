@@ -1,12 +1,16 @@
 /* eslint-disable react/prop-types */
 import AddButton from "./AddSubSection";
-export default function CreateEducation({ data, onChange, onClick }) {
+import DeleteButton from "./DeleteItem";
+export default function CreateEducation({ data, onChange, onClick, onDelete }) {
   return (
     <form className="education-form form-container">
       <h1 className="title-education">Education</h1>
       {data.education.map((edu, index) => (
         <div key={edu.id} className="education-entry">
+          {data.education.length > 1 && <div className="top-education">
           <h2 className="multiple">{`Education ${index + 1}`}</h2>
+          <DeleteButton onClick={() => onDelete(edu.id, 'education')}/>
+          </div>}
           <div className="input-container">
             <label htmlFor={`education-school-${index}`}>School</label>
             <input

@@ -38,6 +38,13 @@ export default function App() {
     });
   }
 
+  function handleDeleteItem(itemId, section) {
+    setData({ ...data, 
+    [section]: data[section].filter((item) => (
+      itemId !== item.id
+    ))})
+  }
+
   function handleAddEducation() {
     setData({
       ...data,
@@ -89,11 +96,13 @@ export default function App() {
           data={data}
           onChange={handleArrayChange}
           onClick={handleAddEducation}
+          onDelete={handleDeleteItem}
         />
         <CreateExperience
           data={data}
           onChange={handleArrayChange}
           onClick={handleAddExperience}
+          onDelete={handleDeleteItem}
         />
         <CreateSkills
           data={data}

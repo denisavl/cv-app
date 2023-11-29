@@ -1,12 +1,16 @@
 /* eslint-disable react/prop-types */
 import AddButton from "./AddSubSection";
-export default function CreateExperience({ data, onChange, onClick }) {
+import DeleteButton from "./DeleteItem";
+export default function CreateExperience({ data, onChange, onClick, onDelete }) {
     return (
       <form className="experience-form form-container">
         <h1 className="title-experience">Professional Experience</h1>
         {data.experience.map((experience, index) => (
           <div key={experience.id} className="experience-entry">
-            <h2 className="multiple">{`Experience ${index+1}`}</h2>
+           {data.experience.length > 1 && <div className="top-experience">
+          <h2 className="multiple">{`Experience ${index + 1}`}</h2>
+          <DeleteButton onClick={() => onDelete(experience.id, 'experience')}/>
+          </div>}
             <div className="input-container">
               <label htmlFor={`experience-job-${index}`}>Job Title</label>
               <input

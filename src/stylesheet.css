@@ -119,13 +119,14 @@ textarea {
     background-color: white;
   }
 
-  .input-skills{
+  .input-skills
+  {
     display: flex;
     align-items: center;
     gap: 10px;
   }
 
-  .delete-skill-btn {
+  .delete-item {
     border: none;
     font-size: 24px;
     background-color: transparent;
@@ -134,9 +135,17 @@ textarea {
     transition: color 0.3s ease;
   }
   
-  .delete-skill-btn:hover {
+  .delete-item:hover {
     color: #555555;
   }
+
+  .top-experience,
+  .top-education{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
 
 /*preview*/
 .right-preview{
