@@ -13,6 +13,7 @@ import { useState } from "react";
 import { v1 as uuid } from "uuid";
 export default function App() {
   const [data, setData] = useState(personCV);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   function handleChange(section, key, value) {
     setData({ ...data, [section]: { ...data[section], [key]: value } });
@@ -31,12 +32,6 @@ export default function App() {
     setData({ ...data, skills: [...data.skills, { name: "", id: uuid() }] });
   }
 
-  function handleDeleteSkill(itemId) {
-    setData({
-      ...data,
-      skills: data.skills.filter((skill) => skill.id !== itemId),
-    });
-  }
 
   function handleDeleteItem(itemId, section) {
     setData({ ...data, 
@@ -84,6 +79,10 @@ export default function App() {
     }));
   }
 
+  function toggleActive(value){
+    setActiveIndex(activeIndex === value ? null : value);
+  }
+
   return (
     <div className="CVApp">
       <div className="left-form">
@@ -91,26 +90,40 @@ export default function App() {
           data={data}
           onChange={handleChange}
           pictureUpload={pictureUpload}
+          isActive={activeIndex === 0}
+        onShow={() => toggleActive(0)}
         />
         <CreateEducation
           data={data}
           onChange={handleArrayChange}
           onClick={handleAddEducation}
           onDelete={handleDeleteItem}
+          isActive={activeIndex === 1}
+        onShow={() => toggleActive(1)}
         />
         <CreateExperience
           data={data}
           onChange={handleArrayChange}
           onClick={handleAddExperience}
           onDelete={handleDeleteItem}
+          isActive={activeIndex === 2}
+        onShow={() => toggleActive(2)}
         />
         <CreateSkills
           data={data}
           onChange={handleArrayChange}
           addSkill={addSkill}
-          deleteSkill={handleDeleteSkill}
+          deleteSkill={handleDeleteItem}
+          isActive={activeIndex === 3}
+        onShow={() => toggleActive(3)}
+        
         />
-        <CreateContact data={data} onChange={handleChange} />
+        <CreateContact 
+        data={data} 
+        onChange={handleChange}
+        isActive={activeIndex === 4}
+        onShow={() => toggleActive(4)}
+        />
       </div>
       <div className="right-preview">
         <CreateHeader data={data} />

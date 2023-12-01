@@ -20,7 +20,7 @@
     display: flex;
     flex-direction: column;
     width: 45%;
-    gap:30px;
+    gap:25px;
 }
 
 label {
@@ -80,7 +80,7 @@ textarea {
 
 .form-container{
     background-color: white;
-    padding: 2rem;
+    padding: 1.2rem;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
@@ -88,7 +88,6 @@ textarea {
 .full-date{
     display: flex;
     justify-content: space-between;
-    /* flex: 1; */
 }
 
 .full-date > div{
@@ -97,10 +96,6 @@ textarea {
 
   #contactPicture {
     display: none;
-  }
-
-  .title-skills{
-    margin-bottom: 15px;
   }
 
   .create-subSection{
@@ -121,6 +116,7 @@ textarea {
 
   .input-skills
   {
+    margin-top: 18px;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -144,7 +140,37 @@ textarea {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.header-section{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 10px;
+}
+
+.expand-less{
+    width: 20px;
+    height: 20px; 
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    transform: rotate(180deg);
+    transition: transform 0.3s ease-in-out;
   }
+.expand-more{
+    width: 20px;
+    height: 20px; 
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+.required {
+    color: red;
+    font-size: 16px;
+}
 
 
 /*preview*/
