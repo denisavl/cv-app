@@ -9,11 +9,61 @@ import ContactPreview from "./components/ContactPreview";
 import SkillsPreview from "./components/SkillsPreview";
 import EducationPreview from "./components/EducationPreview";
 import ExperiencePreview from "./components/ExperiencePreview";
+import CreateContent from "./components/LoadContent";
 import { useState } from "react";
 import { v1 as uuid } from "uuid";
 export default function App() {
+
+  const defaultData = {
+    generalInfo: {
+      fullName: '',
+      profession: '',
+      fileName: '',
+      contactPhoto: null,
+      summary: '',
+   },
+   experience: [{
+       id: uuid(),
+       jobTitle: '',
+       company: '',
+       startDate: '',
+       endDate: '',
+       location: '',
+       description: '',
+   }],
+   education:[{
+       id: uuid(),
+       school: '',
+       degree: '',
+       startDate: '',
+       endDate: '',
+   }
+],
+   skills: [
+       {
+           name: '',
+           id: uuid(),
+       },
+   ],
+   contact:{
+       email: '',
+       phone: '',
+       address: '',
+       linkedIn: '',
+       github: '',
+   }
+  }
+
   const [data, setData] = useState(personCV);
   const [activeIndex, setActiveIndex] = useState(0);
+
+  function clearContent() {
+    setData(defaultData);
+  }
+  
+  function loadContent() {
+    setData(personCV);
+  }
 
   function handleChange(section, key, value) {
     setData({ ...data, [section]: { ...data[section], [key]: value } });
@@ -86,6 +136,7 @@ export default function App() {
   return (
     <div className="CVApp">
       <div className="left-form">
+      <CreateContent onDelete={clearContent} onLoad={loadContent}/>
         <CreateGeneralInformation
           data={data}
           onChange={handleChange}
@@ -124,6 +175,7 @@ export default function App() {
         isActive={activeIndex === 4}
         onShow={() => toggleActive(4)}
         />
+       
       </div>
       <div className="right-preview">
         <CreateHeader data={data} />

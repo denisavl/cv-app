@@ -1,4 +1,5 @@
-import './stylesheet.css'
+import './style/formStyle.css';
+import './style/preview.css';
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
