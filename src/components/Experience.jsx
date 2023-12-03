@@ -8,7 +8,8 @@ export default function CreateExperience({
   onClick,
   onDelete,
   isActive,
-  onShow
+  onShow,
+  errors
 }) {
   return (
     <form className="experience-form form-container">
@@ -43,6 +44,13 @@ export default function CreateExperience({
               }
               required
             />
+            {errors.experience &&
+              errors.experience[index] &&
+              errors.experience[index].jobTitle ? (
+                <div className="error-message">
+                  {errors.experience[index].jobTitle}
+                </div>
+              ) : null}
           </div>
           <div className="input-container">
             <label htmlFor={`experience-company-${index}`}>Company<span className='required'>*</span></label>
@@ -57,6 +65,13 @@ export default function CreateExperience({
               }
               required
             />
+            {errors.experience &&
+              errors.experience[index] &&
+              errors.experience[index].company ? (
+                <div className="error-message">
+                  {errors.experience[index].company}
+                </div>
+              ) : null}
           </div>
           <div className="full-date">
             <div className="input-container">
@@ -74,6 +89,13 @@ export default function CreateExperience({
                 }
                 required
               />
+              {errors.experience &&
+              errors.experience[index] &&
+              errors.experience[index].startDate ? (
+                <div className="error-message">
+                  {errors.experience[index].startDate}
+                </div>
+              ) : null}
             </div>
             <div className="input-container">
               <label htmlFor={`experience-end-date-${index}`}>End Date<span className='required'>*</span></label>
@@ -88,6 +110,13 @@ export default function CreateExperience({
                 }
                 required
               />
+              {errors.experience &&
+              errors.experience[index] &&
+              errors.experience[index].endDate ? (
+                <div className="error-message">
+                  {errors.experience[index].endDate}
+                </div>
+              ) : null}
             </div>
           </div>
 

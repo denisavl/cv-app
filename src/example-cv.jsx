@@ -60,7 +60,7 @@ export const personCV = {
     ],
     contact:{
         email: 'denisa20@gmail.com',
-        phone: '+40 752 638 211',
+        phone: '0752638211',
         address: 'Bucharest, RO',
         linkedIn: 'linkedin.com/in/maria-denisa-vlad',
         github: 'github/denisavl',

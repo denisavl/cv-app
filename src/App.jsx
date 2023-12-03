@@ -12,6 +12,7 @@ import ExperiencePreview from "./components/ExperiencePreview";
 import CreateContent from "./components/LoadContent";
 import { useState } from "react";
 import { v1 as uuid } from "uuid";
+import { validateValues } from "./Validation";
 export default function App() {
 
   const defaultData = {
@@ -54,8 +55,36 @@ export default function App() {
    }
   }
 
+  const initialErrors = {
+    generalInfo: {
+      fullName: '',
+      profession: '',
+    },
+    experience: [
+      {
+      jobTitle: '',
+      company: '',
+      startDate: '',
+      endDate: '',
+    },
+  ],
+    education: [
+      {
+        school: '',
+        degree: '',
+        startDate: '',
+        endDate: '',
+      },
+    ],
+    contact: {
+      email: '',
+      phone: '',
+    },
+  };
+
   const [data, setData] = useState(personCV);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [errors, setErrors] = useState(initialErrors)
 
   function clearContent() {
     setData(defaultData);
@@ -66,16 +95,21 @@ export default function App() {
   }
 
   function handleChange(section, key, value) {
-    setData({ ...data, [section]: { ...data[section], [key]: value } });
+    const newData = { ...data, [section]: { ...data[section], [key]: value } };
+    const newErrors = validateValues(newData, setErrors, initialErrors);
+    setErrors(newErrors);
+    setData(newData);
   }
 
   function handleArrayChange(section, key, value, index) {
-    setData((prevData) => ({
-      ...prevData,
-      [section]: prevData[section].map((item, i) =>
-        i === index ? { ...item, [key]: value } : item
-      ),
-    }));
+      const newData = {...data,
+        [section]: data[section].map((item, i) =>
+          i === index ? { ...item, [key]: value } : item
+        ),
+      };
+      const newErrors = validateValues(newData, setErrors, initialErrors);
+      setErrors(newErrors);
+      setData(newData);
   }
 
   function addSkill() {
@@ -143,6 +177,7 @@ export default function App() {
           pictureUpload={pictureUpload}
           isActive={activeIndex === 0}
         onShow={() => toggleActive(0)}
+        errors={errors}
         />
         <CreateEducation
           data={data}
@@ -151,6 +186,7 @@ export default function App() {
           onDelete={handleDeleteItem}
           isActive={activeIndex === 1}
         onShow={() => toggleActive(1)}
+        errors={errors}
         />
         <CreateExperience
           data={data}
@@ -159,6 +195,7 @@ export default function App() {
           onDelete={handleDeleteItem}
           isActive={activeIndex === 2}
         onShow={() => toggleActive(2)}
+        errors={errors}
         />
         <CreateSkills
           data={data}
@@ -167,6 +204,7 @@ export default function App() {
           deleteSkill={handleDeleteItem}
           isActive={activeIndex === 3}
         onShow={() => toggleActive(3)}
+        errors={errors}
         
         />
         <CreateContact 
@@ -174,6 +212,7 @@ export default function App() {
         onChange={handleChange}
         isActive={activeIndex === 4}
         onShow={() => toggleActive(4)}
+        errors={errors}
         />
        
       </div>

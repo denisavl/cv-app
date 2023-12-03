@@ -196,3 +196,9 @@ textarea {
     color: red;
     font-size: 16px;
 }
+
+.error-message{
+  padding-left: 5px;
+  font-size: 14px;
+  color: red;
+}

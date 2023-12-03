@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import expandIcon from '../assets/expand.svg'
-export default function CreateGeneralInformation({data, onChange, pictureUpload, isActive, onShow}) {
+export default function CreateGeneralInformation({data, onChange, pictureUpload, isActive, onShow, errors}) {
   return(
     <form className="personal-details-form form-container">
       <div className="header-section" onClick={onShow}>
@@ -24,6 +24,9 @@ export default function CreateGeneralInformation({data, onChange, pictureUpload,
             required
         />
         </div>
+        {errors.generalInfo.fullName ? (
+              <div className="error-message">{errors.generalInfo.fullName}</div>
+            ) : null}
         <div className="input-container" key='Profession'>
         <label htmlFor='profession' className='profession'>Profession<span className='required'>*</span></label>
           <input
@@ -37,6 +40,9 @@ export default function CreateGeneralInformation({data, onChange, pictureUpload,
             required
         />
         </div>
+        {errors.generalInfo.profession ? (
+              <div className="error-message">{errors.generalInfo.profession}</div>
+            ) : null}
         <div className="input-container">
         <label htmlFor="summary">Summary</label>
         <textarea

@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import expandIcon from '../assets/expand.svg';
 
-export default function CreateContact({ data, onChange, isActive, onShow }) {
+export default function CreateContact({ data, onChange, isActive, onShow, errors }) {
   return (
     <form className="contact-form form-container">
       <div className="header-section" onClick={onShow}>
@@ -27,6 +27,9 @@ export default function CreateContact({ data, onChange, isActive, onShow }) {
               required
             />
           </div>
+          {errors.contact.email ? (
+              <div className="error-message">{errors.contact.email}</div>
+            ) : null}
           <div className="input-container" key="phone">
             <label htmlFor="phone">
               Phone
@@ -42,6 +45,9 @@ export default function CreateContact({ data, onChange, isActive, onShow }) {
               required
             />
           </div>
+          {errors.contact.phone ? (
+              <div className="error-message">{errors.contact.phone }</div>
+            ) : null}
           <div className="input-container" key="address">
             <label htmlFor="address">
               Address

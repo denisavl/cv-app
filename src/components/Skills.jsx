@@ -8,7 +8,7 @@ export default function CreateSkills({
   addSkill,
   deleteSkill,
   isActive,
-  onShow
+  onShow,
 }) {
   return (
     <form className="skills-form form-container">
