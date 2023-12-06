@@ -4,15 +4,14 @@ import CreateEducation from "./components/Education";
 import CreateExperience from "./components/Experience";
 import CreateContact from "./components/Contact";
 import CreateSkills from "./components/Skills";
-import CreateHeader from "./components/Header";
-import ContactPreview from "./components/ContactPreview";
-import SkillsPreview from "./components/SkillsPreview";
-import EducationPreview from "./components/EducationPreview";
-import ExperiencePreview from "./components/ExperiencePreview";
 import CreateContent from "./components/LoadContent";
-import { useState } from "react";
-import { v1 as uuid } from "uuid";
 import { validateValues } from "./Validation";
+import previewIcon from './assets/previewIcon.svg'
+import { useState} from "react";
+import { v1 as uuid } from "uuid";
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+import CreatePreview from "./components/PreviewCV";
 export default function App() {
 
   const defaultData = {
@@ -84,7 +83,8 @@ export default function App() {
 
   const [data, setData] = useState(personCV);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [errors, setErrors] = useState(initialErrors)
+  const [errors, setErrors] = useState(initialErrors);
+  const [isPreviewVisible, setIsPreviewVisible] = useState(false);
 
   function clearContent() {
     setData(defaultData);
@@ -92,6 +92,44 @@ export default function App() {
   
   function loadContent() {
     setData(personCV);
+    const newInitialErrors = {
+      generalInfo: {
+        fullName: '',
+        profession: '',
+      },
+      experience: personCV.experience.map(() => ({
+        jobTitle: '',
+        company: '',
+        startDate: '',
+        endDate: '',
+      })),
+      education: personCV.education.map(() => ({
+        school: '',
+        degree: '',
+        startDate: '',
+        endDate: '',
+      })),
+      skills: personCV.skills.map(() => ({ name: '' })),
+      contact: {
+        email: '',
+        phone: '',
+      },
+    };
+  
+    setErrors(newInitialErrors);
+  }
+
+  async function downloadFile() {
+    try {
+      const previewSection = document.querySelector('.right-preview');
+      const canvas = await html2canvas(previewSection);
+      const pdf = new jsPDF();
+      const aspectRatio = canvas.width / canvas.height;
+      pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 10, 10, 190, 190 / aspectRatio);
+      pdf.save('cv.pdf');
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+    }
   }
 
   function handleChange(section, key, value) {
@@ -167,10 +205,21 @@ export default function App() {
     setActiveIndex(activeIndex === value ? null : value);
   }
 
+  function showPreview(){
+    setIsPreviewVisible(true);
+  }
+
+  function hidePreview(){
+    setIsPreviewVisible(false);
+  }
+
   return (
     <div className="CVApp">
+      <CreateContent 
+      onDelete={clearContent} 
+      onLoad={loadContent}
+      onDownload={downloadFile}/>
       <div className="left-form">
-      <CreateContent onDelete={clearContent} onLoad={loadContent}/>
         <CreateGeneralInformation
           data={data}
           onChange={handleChange}
@@ -216,21 +265,12 @@ export default function App() {
         />
        
       </div>
-      <div className="right-preview">
-        <CreateHeader data={data} />
-        <div className="left-section">
-          <ContactPreview data={data} />
-          <SkillsPreview data={data} />
+      <button className="previewIcon" onClick={showPreview}> <img src={previewIcon} alt="eye icon preview" /></button>
+      {isPreviewVisible && (
+        <div className="preview-container" onClick={hidePreview}>
+          <CreatePreview data={data}/>
         </div>
-        <div className="right-section">
-          <div className="summary-section">
-            <h2 className="summary-title title-preview">Summary</h2>
-            <p>{data.generalInfo.summary}</p>
-          </div>
-          <EducationPreview data={data} />
-          <ExperiencePreview data={data} />
-        </div>
-      </div>
+      )}
     </div>
   );
 }

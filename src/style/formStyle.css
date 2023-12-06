@@ -1,26 +1,11 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-#root{
-    background-color: #f3f4f6;
-    font-family: 'Trebuchet MS', sans-serif;
-}
-
-.CVApp{
-    display: flex;
-    padding: 2em;
-    gap: 3em;
-    margin: 0;
-}
-
 .left-form{
     display: flex;
     flex-direction: column;
+    max-width: 750px;
     width: 45%;
+    flex-wrap: wrap;
     gap:25px;
+    height: fit-content;
 }
 
 label {
@@ -80,18 +65,19 @@ textarea {
 
 .form-container{
     background-color: white;
-    padding: 0.8rem 1.5rem;
+    padding: 0.6rem 1.3rem;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.top-content{
+#top-content{
   display: flex;
-  justify-content: center;
-  gap: 15px;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.top-content > button {
+.clearBtn,
+.loadBtn {
   padding: 0.6em 3.5em;
   border: none;
   font-size: 16px;
@@ -101,8 +87,10 @@ textarea {
   transition: background-color 0.3s ease-in-out;
 }
 
-.top-content > button:hover,
-.top-content > button:focus{
+.clearBtn:hover,
+.loadBtn:hover,
+.clearBtn:focus,
+.loadBtn:focus{
   background-color: #ddd;
 }
 
@@ -110,6 +98,22 @@ textarea {
   color: rgb(206, 3, 3);
 }
 
+.downloadBtn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  transition: background-color 0.3s ease-in-out;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.downloadBtn > img{
+  margin-left: 5px;
+  width: 20px;
+}
 .full-date{
     display: flex;
     justify-content: space-between;
