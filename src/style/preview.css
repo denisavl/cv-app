@@ -6,24 +6,41 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.4);
+    overflow: auto;
+  }
+
+  .downloadBtn{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    left: 70%;
+    top:2%;
+    z-index: 1;
+    margin: 5px 0px;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .downloadBtn:hover{
+    transform: scale(1.1);
+  }
+
+  #download-icon{
+    width: 45px;
   }
 
 .right-preview {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 50%;
+    position: sticky;
+    height: 29.7cm;
+    width: 21cm;
+    top: 2rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     display: grid;
     grid-template-columns: 1fr 4fr;
     grid-template-rows: 1fr 5fr;
     font-size: 17px;
-    /* aspect-ratio: 210 / 297; */
     background-color:white;
-    margin-top: 10px;
-    max-height: 100vh;
-    overflow: auto;
+    margin: 0 auto;
 }
 
 .img-container>img {

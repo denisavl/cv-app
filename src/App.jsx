@@ -6,78 +6,81 @@ import CreateContact from "./components/Contact";
 import CreateSkills from "./components/Skills";
 import CreateContent from "./components/LoadContent";
 import { validateValues } from "./Validation";
-import previewIcon from './assets/previewIcon.svg'
-import { useState} from "react";
+import previewIcon from "./assets/previewIcon.svg";
+import { useState, useRef } from "react";
 import { v1 as uuid } from "uuid";
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
+import { useReactToPrint } from 'react-to-print'
 import CreatePreview from "./components/PreviewCV";
-export default function App() {
+import downloadIcon from './assets/download.svg'
 
+export default function App() {
   const defaultData = {
     generalInfo: {
-      fullName: '',
-      profession: '',
-      fileName: '',
+      fullName: "",
+      profession: "",
+      fileName: "",
       contactPhoto: null,
-      summary: '',
-   },
-   experience: [{
-       id: uuid(),
-       jobTitle: '',
-       company: '',
-       startDate: '',
-       endDate: '',
-       location: '',
-       description: '',
-   }],
-   education:[{
-       id: uuid(),
-       school: '',
-       degree: '',
-       startDate: '',
-       endDate: '',
-   }
-],
-   skills: [
-       {
-           name: '',
-           id: uuid(),
-       },
-   ],
-   contact:{
-       email: '',
-       phone: '',
-       address: '',
-       linkedIn: '',
-       github: '',
-   }
-  }
-
-  const initialErrors = {
-    generalInfo: {
-      fullName: '',
-      profession: '',
+      summary: "",
     },
     experience: [
       {
-      jobTitle: '',
-      company: '',
-      startDate: '',
-      endDate: '',
-    },
-  ],
+        id: uuid(),
+        jobTitle: "",
+        company: "",
+        startDate: "",
+        endDate: "",
+        location: "",
+        description: "",
+      },
+    ],
     education: [
       {
-        school: '',
-        degree: '',
-        startDate: '',
-        endDate: '',
+        id: uuid(),
+        school: "",
+        degree: "",
+        startDate: "",
+        endDate: "",
+      },
+    ],
+    skills: [
+      {
+        name: "",
+        id: uuid(),
       },
     ],
     contact: {
-      email: '',
-      phone: '',
+      email: "",
+      phone: "",
+      address: "",
+      linkedIn: "",
+      github: "",
+    },
+  };
+
+  const initialErrors = {
+    generalInfo: {
+      fullName: "",
+      profession: "",
+    },
+    experience: [
+      {
+        jobTitle: "",
+        company: "",
+        startDate: "",
+        endDate: "",
+      },
+    ],
+    education: [
+      {
+        school: "",
+        degree: "",
+        startDate: "",
+        endDate: "",
+      },
+    ],
+    contact: {
+      email: "",
+      phone: "",
     },
   };
 
@@ -89,48 +92,40 @@ export default function App() {
   function clearContent() {
     setData(defaultData);
   }
-  
+
   function loadContent() {
     setData(personCV);
     const newInitialErrors = {
       generalInfo: {
-        fullName: '',
-        profession: '',
+        fullName: "",
+        profession: "",
       },
       experience: personCV.experience.map(() => ({
-        jobTitle: '',
-        company: '',
-        startDate: '',
-        endDate: '',
+        jobTitle: "",
+        company: "",
+        startDate: "",
+        endDate: "",
       })),
       education: personCV.education.map(() => ({
-        school: '',
-        degree: '',
-        startDate: '',
-        endDate: '',
+        school: "",
+        degree: "",
+        startDate: "",
+        endDate: "",
       })),
-      skills: personCV.skills.map(() => ({ name: '' })),
+      skills: personCV.skills.map(() => ({ name: "" })),
       contact: {
-        email: '',
-        phone: '',
+        email: "",
+        phone: "",
       },
     };
-  
+
     setErrors(newInitialErrors);
   }
 
-  async function downloadFile() {
-    try {
-      const previewSection = document.querySelector('.right-preview');
-      const canvas = await html2canvas(previewSection);
-      const pdf = new jsPDF();
-      const aspectRatio = canvas.width / canvas.height;
-      pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 10, 10, 190, 190 / aspectRatio);
-      pdf.save('cv.pdf');
-    } catch (error) {
-      console.error('Error generating PDF:', error);
-    }
-  }
+  const componentRef = useRef()
+  const downloadFile = useReactToPrint({ content: () => componentRef.current,
+                                        documentTitle: 'cv'})
+
 
   function handleChange(section, key, value) {
     const newData = { ...data, [section]: { ...data[section], [key]: value } };
@@ -140,26 +135,26 @@ export default function App() {
   }
 
   function handleArrayChange(section, key, value, index) {
-      const newData = {...data,
-        [section]: data[section].map((item, i) =>
-          i === index ? { ...item, [key]: value } : item
-        ),
-      };
-      const newErrors = validateValues(newData, setErrors, initialErrors);
-      setErrors(newErrors);
-      setData(newData);
+    const newData = {
+      ...data,
+      [section]: data[section].map((item, i) =>
+        i === index ? { ...item, [key]: value } : item
+      ),
+    };
+    const newErrors = validateValues(newData, setErrors, initialErrors);
+    setErrors(newErrors);
+    setData(newData);
   }
 
   function addSkill() {
     setData({ ...data, skills: [...data.skills, { name: "", id: uuid() }] });
   }
 
-
   function handleDeleteItem(itemId, section) {
-    setData({ ...data, 
-    [section]: data[section].filter((item) => (
-      itemId !== item.id
-    ))})
+    setData({
+      ...data,
+      [section]: data[section].filter((item) => itemId !== item.id),
+    });
   }
 
   function handleAddEducation() {
@@ -201,32 +196,33 @@ export default function App() {
     }));
   }
 
-  function toggleActive(value){
+  function toggleActive(value) {
     setActiveIndex(activeIndex === value ? null : value);
   }
 
-  function showPreview(){
+  function showPreview() {
     setIsPreviewVisible(true);
   }
 
-  function hidePreview(){
+  function hidePreview() {
     setIsPreviewVisible(false);
   }
 
   return (
     <div className="CVApp">
-      <CreateContent 
-      onDelete={clearContent} 
-      onLoad={loadContent}
-      onDownload={downloadFile}/>
-      <div className="left-form">
+        <CreateContent
+          onDelete={clearContent}
+          onLoad={loadContent}
+        />
+
+      <div className="form-section">
         <CreateGeneralInformation
           data={data}
           onChange={handleChange}
           pictureUpload={pictureUpload}
           isActive={activeIndex === 0}
-        onShow={() => toggleActive(0)}
-        errors={errors}
+          onShow={() => toggleActive(0)}
+          errors={errors}
         />
         <CreateEducation
           data={data}
@@ -234,8 +230,8 @@ export default function App() {
           onClick={handleAddEducation}
           onDelete={handleDeleteItem}
           isActive={activeIndex === 1}
-        onShow={() => toggleActive(1)}
-        errors={errors}
+          onShow={() => toggleActive(1)}
+          errors={errors}
         />
         <CreateExperience
           data={data}
@@ -243,8 +239,8 @@ export default function App() {
           onClick={handleAddExperience}
           onDelete={handleDeleteItem}
           isActive={activeIndex === 2}
-        onShow={() => toggleActive(2)}
-        errors={errors}
+          onShow={() => toggleActive(2)}
+          errors={errors}
         />
         <CreateSkills
           data={data}
@@ -252,23 +248,27 @@ export default function App() {
           addSkill={addSkill}
           deleteSkill={handleDeleteItem}
           isActive={activeIndex === 3}
-        onShow={() => toggleActive(3)}
-        errors={errors}
-        
+          onShow={() => toggleActive(3)}
+          errors={errors}
         />
-        <CreateContact 
-        data={data} 
-        onChange={handleChange}
-        isActive={activeIndex === 4}
-        onShow={() => toggleActive(4)}
-        errors={errors}
+        <CreateContact
+          data={data}
+          onChange={handleChange}
+          isActive={activeIndex === 4}
+          onShow={() => toggleActive(4)}
+          errors={errors}
         />
-       
       </div>
-      <button className="previewIcon" onClick={showPreview}> <img src={previewIcon} alt="eye icon preview" /></button>
+      <button className="previewIcon" onClick={showPreview}>
+        {" "}
+        <img src={previewIcon} alt="eye icon preview" />
+      </button>
       {isPreviewVisible && (
         <div className="preview-container" onClick={hidePreview}>
-          <CreatePreview data={data}/>
+           <button className="downloadBtn" type='button' onClick={downloadFile}>
+                <img src={downloadIcon} alt="download icon" id='download-icon'/>
+            </button>
+          <CreatePreview data={data} reference={componentRef} />
         </div>
       )}
     </div>

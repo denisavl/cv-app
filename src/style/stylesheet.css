@@ -3,24 +3,22 @@
     padding: 0;
     box-sizing: border-box;
 }
-body, html{
-    height: 100%;
-} 
 
- #root{
-    font-family: 'Trebuchet MS', sans-serif;
-    height: 100%;
-    background-color: #f3f4f6;
+body{
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
+body::-webkit-scrollbar{
+    display: none;
+  }
+
 .CVApp{
+    font-family: 'Trebuchet MS', sans-serif;
     display: flex;
-    padding: 2em;
-    gap: 1em;
-    /* max-width: 1500px; */
-    width: 100%;
-    justify-content: center;
+    flex-direction: column;
     background-color: #f3f4f6;
+    height: 100dvh;
 }
 
 .previewIcon > img{
@@ -50,4 +48,17 @@ body, html{
     .CVApp{
         gap: 1.5em;
     }
+}
+
+@media print {
+    .right-preview {
+      overflow: hidden; /* Hide overflow in print */
+      max-height: none; /* Remove height limit in print */
+      font-size: 14px; /* Adjust font size for better readability on paper */
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+      }
 }

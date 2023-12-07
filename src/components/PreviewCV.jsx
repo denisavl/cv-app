@@ -5,9 +5,9 @@ import SkillsPreview from "./SkillsPreview";
 import EducationPreview from "./EducationPreview";
 import ExperiencePreview from "./ExperiencePreview";
 
-export default function CreatePreview({ data }) {
+export default function CreatePreview({ data, reference}) {
   return (
-    <div className="right-preview">
+    <div className="right-preview" ref={reference}>
       <CreateHeader data={data} />
       <div className="left-section">
         <ContactPreview data={data} />
