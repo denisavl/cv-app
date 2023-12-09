@@ -39,6 +39,7 @@ export default function CreateExperience({
               type="text"
               placeholder="Job Title"
               value={experience.jobTitle}
+              maxLength={50}
               onChange={(e) =>
                 onChange("experience", "jobTitle", e.target.value, index)
               }
@@ -60,6 +61,7 @@ export default function CreateExperience({
               type="text"
               placeholder="Company"
               value={experience.company}
+              maxLength={50}
               onChange={(e) =>
                 onChange("experience", "company", e.target.value, index)
               }
@@ -84,6 +86,7 @@ export default function CreateExperience({
                 type="text"
                 placeholder="Start Date (mm/yyyy)"
                 value={experience.startDate}
+                maxLength={7}
                 onChange={(e) =>
                   onChange("experience", "startDate", e.target.value, index)
                 }
@@ -105,6 +108,7 @@ export default function CreateExperience({
                 type="text"
                 placeholder="End Date (mm/yyyy)"
                 value={experience.endDate}
+                maxLength={7}
                 onChange={(e) =>
                   onChange("experience", "endDate", e.target.value, index)
                 }
@@ -128,6 +132,7 @@ export default function CreateExperience({
               type="text"
               placeholder="Location"
               value={experience.location}
+              maxLength={50}
               onChange={(e) =>
                 onChange("experience", "location", e.target.value, index)
               }
@@ -143,6 +148,7 @@ export default function CreateExperience({
               type="text"
               placeholder="Description"
               value={experience.description}
+              maxLength={200}
               onChange={(e) =>
                 onChange("experience", "description", e.target.value, index)
               }

@@ -7,8 +7,8 @@ export default function ExperiencePreview({data}){
             <div className="experience-container" key={field.id}>
                 <h3 className="job-preview">{field.jobTitle +', ' + field.company }</h3>
                 <p className="date-experience-preview">{field.startDate + ' - ' + field.endDate}</p>
-                <p className="location-preview">Location: {field.location}</p>
-                <li className="description-preview">{field.description}</li>
+                {field.location &&  <p className="location-preview">Location: {field.location}</p>}
+                {field.description && <li className="description-preview">{field.description}</li>}
             </div>
         ))}
         </div>

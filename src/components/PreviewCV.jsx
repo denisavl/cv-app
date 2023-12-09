@@ -20,7 +20,7 @@ export default function CreatePreview({ data, reference, onDownload }) {
         </div>
         <div className="right-section">
           <div className="summary-section">
-            <h2 className="summary-title title-preview">Summary</h2>
+            {data.generalInfo.summary &&  <h2 className="summary-title title-preview">Summary</h2>}
             <p>{data.generalInfo.summary}</p>
           </div>
           <EducationPreview data={data} />

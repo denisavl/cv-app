@@ -43,6 +43,7 @@ export default function CreateEducation({
                   type="text"
                   placeholder="School"
                   value={edu.school}
+                  maxLength={50}
                   onChange={(e) =>
                     onChange("education", "school", e.target.value, index)
                   }
@@ -67,6 +68,7 @@ export default function CreateEducation({
                   type="text"
                   placeholder="Degree"
                   value={edu.degree}
+                  maxLength={50}
                   onChange={(e) =>
                     onChange("education", "degree", e.target.value, index)
                   }
@@ -91,6 +93,7 @@ export default function CreateEducation({
                     type="text"
                     placeholder="Start Date (mm/yyyy)"
                     value={edu.startDate}
+                    maxLength={7}
                     onChange={(e) =>
                       onChange("education", "startDate", e.target.value, index)
                     }
@@ -114,6 +117,7 @@ export default function CreateEducation({
                     type="text"
                     placeholder="End Date (mm/yyyy)"
                     value={edu.endDate}
+                    maxLength={7}
                     onChange={(e) =>
                       onChange("education", "endDate", e.target.value, index)
                     }

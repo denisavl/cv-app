@@ -22,6 +22,7 @@ export default function CreateContact({ data, onChange, isActive, onShow, errors
               id="email"
               name="email"
               placeholder="Email"
+              maxLength={50}
               value={data.contact.email}
               onChange={(e) => onChange('contact', 'email', e.target.value)}
               required
@@ -41,6 +42,7 @@ export default function CreateContact({ data, onChange, isActive, onShow, errors
               name="phone"
               placeholder="Phone"
               value={data.contact.phone}
+              maxLength={20}
               onChange={(e) => onChange('contact', 'phone', e.target.value)}
               required
             />
@@ -58,6 +60,7 @@ export default function CreateContact({ data, onChange, isActive, onShow, errors
               name="address"
               placeholder="Address"
               value={data.contact.address}
+              maxLength={40}
               onChange={(e) => onChange('contact', 'address', e.target.value)}
             />
           </div>
@@ -71,6 +74,7 @@ export default function CreateContact({ data, onChange, isActive, onShow, errors
               name="linkedIn"
               placeholder="LinkedIn"
               value={data.contact.linkedIn}
+              maxLength={50}
               onChange={(e) => onChange('contact', 'linkedIn', e.target.value)}
             />
           </div>
@@ -84,6 +88,7 @@ export default function CreateContact({ data, onChange, isActive, onShow, errors
               name="github"
               placeholder="Github"
               value={data.contact.github}
+              maxLength={30}
               onChange={(e) => onChange('contact', 'github', e.target.value)}
             />
           </div>
