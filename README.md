@@ -4,7 +4,7 @@
 
 # Technologies Used
 - React: The app is built using React, a popular JavaScript library for building user interfaces. React's component-based architecture enhances code organization and maintainability.
-- HTML & CSS: The app's structure and styling are crafted using HTML and CSS to create a visually appealing and responsive user interface.
+- CSS: The app's structure and styling are crafted using CSS to create a visually appealing and responsive user interface.
 
 # Features
 - Easy-to-Use Form: The intuitive form guides users through the process of entering their CV details, ensuring a smooth and straightforward experience.
