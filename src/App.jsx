@@ -11,7 +11,7 @@ import { useState, useRef } from "react";
 import { v1 as uuid } from "uuid";
 import { useReactToPrint } from 'react-to-print'
 import CreatePreview from "./components/PreviewCV";
-import downloadIcon from './assets/download.svg'
+
 
 export default function App() {
   const defaultData = {
@@ -265,10 +265,7 @@ export default function App() {
       </button>
       {isPreviewVisible && (
         <div className="preview-container" onClick={hidePreview}>
-           <button className="downloadBtn" type='button' onClick={downloadFile}>
-                <img src={downloadIcon} alt="download icon" id='download-icon'/>
-            </button>
-          <CreatePreview data={data} reference={componentRef} />
+          <CreatePreview data={data} reference={componentRef} onDownload={downloadFile}/>
         </div>
       )}
     </div>

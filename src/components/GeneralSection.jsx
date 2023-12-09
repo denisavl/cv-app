@@ -50,6 +50,7 @@ export default function CreateGeneralInformation({data, onChange, pictureUpload,
           id="summary"
           placeholder="Summary"
           value={data.generalInfo.summary}
+          maxLength={200}
           onChange={(e) => onChange('generalInfo', 'summary', e.target.value)}
         ></textarea>
       </div>

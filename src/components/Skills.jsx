@@ -29,6 +29,7 @@ export default function CreateSkills({
             type="text"
             placeholder="Language or Technology"
             value={skill.name}
+            maxLength={30}
             onChange={(e) => onChange("skills", "name", e.target.value, index)}
           />
           {data.skills.length > 1 && (

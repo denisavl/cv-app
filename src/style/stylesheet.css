@@ -18,7 +18,7 @@ body::-webkit-scrollbar{
     display: flex;
     flex-direction: column;
     background-color: #f3f4f6;
-    height: 100dvh;
+    /* height: 100vh; */
 }
 
 .previewIcon > img{
@@ -45,20 +45,126 @@ body::-webkit-scrollbar{
 }
 
 @media only screen and (max-width: 768px) {
-    .CVApp{
-        gap: 1.5em;
+    .right-buttons > button{
+        padding: 0.4em 1.3em;
+        font-size: 14px;
+    }
+
+    h1{
+        font-size: 19px;
+    }
+
+    h2{
+        font-size: 16px;
+    }
+
+    h3
+    {
+        font-size: 13px;
+    }
+
+    .input-container > *{
+        font-size: 15px;
+    }
+    .contact-container > *,
+    p,
+    li
+    {
+        font-size: 11px;
+    }
+
+    input{
+        padding: 0.4em;
+    }
+
+    .full-date{
+        gap:10px;
+    }
+
+    .previewIcon > img{
+        width: 35px;
+        height: 35px;
+    }
+
+    .previewIcon {
+        margin: 20px 10px;
+    }
+
+    .img-container>img{
+        width: 100px;
+        height: 100px;
+    }
+
+    .header{
+        gap: 25px;
+        padding: 10px 30px;
+    }
+
+    #download-icon{
+        width: 30px;
+    }
+
+    #contact-icon{
+        width: 20px;
+    }
+
+    .left-section,
+    .right-section{
+        padding:  12px;
+        gap: 2px;
+    }
+
+    .left-section{
+        width: 150px;
+    }
+
+    .title-preview {
+        margin: 5px;
+    }
+
+    .skills-preview-title {
+        margin-top: 15px;
+    }
+
+    .multiple{
+        font-size: 17px;
+    }
+
+    .right-preview{
+        grid-template-rows: 130px 1fr;
+    }
+
+}
+
+@media only screen and (max-width: 1024px) {
+
+    .form-section{
+        width: 75%;
+    }
+
+    .right-preview {
+        max-width: 90%;
     }
 }
 
 @media print {
     .right-preview {
-      overflow: hidden; /* Hide overflow in print */
-      max-height: none; /* Remove height limit in print */
-      font-size: 14px; /* Adjust font size for better readability on paper */
+      min-height: 29.7cm;
+      font-size: 14px; 
+      margin: 0;
+      box-shadow: none;
     }
 
-    body {
+    html, body {
         margin: 0;
-        padding: 0;
-      }
+        box-sizing: border-box;
+    }
+
+    .downloadBtn{
+        display: none;
+    }
+
+    @page{
+        padding-top: 5px;
+    }
 }
