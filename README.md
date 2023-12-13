@@ -1,5 +1,7 @@
 # CV Builder App
 
+Live: https://cv-app-react-phi.vercel.app/
+
   This React-based application allows users to effortlessly create and customize their Curriculum Vitae (CV) by filling out a user-friendly form. The app is designed to streamline the CV creation process, providing a convenient way to input information about General Details, Education, Work Experience, Skills, and Contact Information.
 
 # Technologies Used
