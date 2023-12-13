@@ -5,13 +5,12 @@ import CreateExperience from "./components/Experience";
 import CreateContact from "./components/Contact";
 import CreateSkills from "./components/Skills";
 import CreateContent from "./components/LoadContent";
-import { ValidateValues } from "./Validation";
+import { ValidateValues } from "./ValidateForms";
 import previewIcon from "./assets/previewIcon.svg";
 import { useState, useRef } from "react";
 import { v1 as uuid } from "uuid";
 import { useReactToPrint } from 'react-to-print'
 import CreatePreview from "./components/PreviewCV";
-
 
 export default function App() {
   const defaultData = {
