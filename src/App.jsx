@@ -5,7 +5,7 @@ import CreateExperience from "./components/Experience";
 import CreateContact from "./components/Contact";
 import CreateSkills from "./components/Skills";
 import CreateContent from "./components/LoadContent";
-import { validateValues } from "./Validation";
+import { ValidateValues } from "./Validation";
 import previewIcon from "./assets/previewIcon.svg";
 import { useState, useRef } from "react";
 import { v1 as uuid } from "uuid";
@@ -129,7 +129,7 @@ export default function App() {
 
   function handleChange(section, key, value) {
     const newData = { ...data, [section]: { ...data[section], [key]: value } };
-    const newErrors = validateValues(newData, setErrors, initialErrors);
+    const newErrors = ValidateValues(newData, setErrors, initialErrors);
     setErrors(newErrors);
     setData(newData);
   }
@@ -141,7 +141,7 @@ export default function App() {
         i === index ? { ...item, [key]: value } : item
       ),
     };
-    const newErrors = validateValues(newData, setErrors, initialErrors);
+    const newErrors = ValidateValues(newData, setErrors, initialErrors);
     setErrors(newErrors);
     setData(newData);
   }
